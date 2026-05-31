@@ -44,6 +44,10 @@ Desenvolver uma solução de Analytics capaz de transformar dados brutos em insi
 - VS Code
 - Jupyter Notebook
 
+## criação de valores e nomes ficticios 
+
+- Como o dataset original não disponibiliza nomes comerciais e preços unitários dos produtos, foram gerados nomes e valores fictícios consistentes com cada categoria para fins de análise exploratória e visualização de dados.
+
 ---
 
 # Estrutura do Projeto
