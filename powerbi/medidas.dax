@@ -1,0 +1,27 @@
+Calendario =
+ADDCOLUMNS(
+    CALENDAR(MIN('Fato Pedidos'[data_compra]), MAX('Fato Pedidos'[data_compra])),
+    "Ano", YEAR([Date]), "Mes Numero", MONTH([Date]),
+    "Mes", FORMAT([Date], "MMM"), "Ano-Mes", FORMAT([Date], "YYYY-MM")
+)
+
+Pedidos = DISTINCTCOUNT('Fato Pedidos'[order_id])
+Receita Produtos = SUM('Fato Pedidos'[receita_produtos])
+Frete Total = SUM('Fato Pedidos'[frete_total])
+Ticket Medio = DIVIDE([Receita Produtos], [Pedidos])
+Itens Vendidos = SUM('Fato Pedidos'[itens_vendidos])
+Frete Medio por Item = DIVIDE([Frete Total], [Itens Vendidos])
+
+Pedidos Entregues = CALCULATE([Pedidos], 'Fato Pedidos'[order_status] = "delivered")
+Prazo Medio Entrega = AVERAGE('Fato Pedidos'[dias_entrega])
+Pedidos Atrasados = CALCULATE([Pedidos], 'Fato Pedidos'[order_status] = "delivered", 'Fato Pedidos'[atrasado] = TRUE())
+Taxa de Atraso = DIVIDE([Pedidos Atrasados], [Pedidos Entregues])
+SLA Entrega = 1 - [Taxa de Atraso]
+
+Nota Media = AVERAGE('Fato Pedidos'[nota_media])
+Pedidos Avaliados = CALCULATE([Pedidos], NOT ISBLANK('Fato Pedidos'[nota_media]))
+Avaliacoes Positivas = CALCULATE([Pedidos], 'Fato Pedidos'[nota_media] >= 4)
+Taxa Avaliacao Positiva = DIVIDE([Avaliacoes Positivas], [Pedidos Avaliados])
+
+Receita Mes Anterior = CALCULATE([Receita Produtos], DATEADD(Calendario[Date], -1, MONTH))
+Crescimento Receita MoM = DIVIDE([Receita Produtos] - [Receita Mes Anterior], [Receita Mes Anterior])

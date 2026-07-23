@@ -1,0 +1,8 @@
+{
+  "name": "E-commerce Logistics — Executivo",
+  "dataColors": ["#0B5FA5", "#00A6A6", "#F4A261", "#E76F51", "#264653", "#8AB17D"],
+  "background": "#F7F9FC",
+  "foreground": "#1F2937",
+  "tableAccent": "#0B5FA5",
+  "visualStyles": {"card":{"*":{"calloutValue":[{"fontSize":26,"color":{"solid":{"color":"#0B5FA5"}}}],"categoryLabels":[{"color":{"solid":{"color":"#6B7280"}}}]}}}
+}
